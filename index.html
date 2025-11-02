@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="id" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Portofolio | Nama Kamu</title>
+    <meta name="description" content="Portofolio pribadi – proyek, keterampilan, dan kontak." />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>💼</text></svg>" />
+    <link rel="stylesheet" href="./assets/css/styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="#home" aria-label="Ke bagian awal">
+          <span class="brand-logo"></span>
+          <span class="brand-name">Portofolio</span>
+        </a>
+        <nav class="nav" aria-label="Navigasi utama">
+          <button class="nav-toggle" id="navToggle" aria-label="Buka menu" aria-controls="navList" aria-expanded="false">
+            <span></span><span></span><span></span>
+          </button>
+          <ul class="nav-list" id="navList">
+            <li><a href="#home">Beranda</a></li>
+            <li><a href="#about">Tentang</a></li>
+            <li><a href="#skills">Skill</a></li>
+            <li><a href="#projects">Proyek</a></li>
+            <li><a href="#contact">Kontak</a></li>
+          </ul>
+        </nav>
+        <button id="themeToggle" class="theme-toggle" aria-label="Ganti tema">
+          <span class="sun">☀️</span>
+          <span class="moon">🌙</span>
+        </button>
+      </div>
+    </header>
+
+    <main id="home">
+      <section class="section section--hero">
+        <div class="container hero">
+        <div class="hero-content">
+          <p class="eyebrow">Halo, aku</p>
+          <h1 class="title">Muhammad Kemal Syahru Ramadhan</h1>
+          <p class="subtitle">Frontend Developer • UI Enthusiast • JavaScript</p>
+          <div class="hero-cta">
+            <a class="btn btn-primary" href="./assets/docs/CV.pdf" download>Unduh CV</a>
+            <a class="btn btn-ghost" href="#projects">Lihat Proyek</a>
+          </div>
+          <div class="socials">
+            <a href="#" aria-label="GitHub" title="GitHub">
+              <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M12 .5a12 12 0 0 0-3.79 23.4c.6.11.82-.26.82-.58v-2.17c-3.34.73-4.04-1.61-4.04-1.61-.55-1.4-1.35-1.77-1.35-1.77-1.11-.76.09-.75.09-.75 1.22.08 1.86 1.26 1.86 1.26 1.09 1.86 2.86 1.32 3.55 1.01.11-.8.43-1.32.78-1.63-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.25-3.22-.13-.31-.54-1.56.12-3.26 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.29-1.55 3.3-1.23 3.3-1.23.66 1.7.25 2.95.12 3.26.78.84 1.25 1.91 1.25 3.22 0 4.61-2.81 5.63-5.49 5.93.44.38.83 1.12.83 2.26v3.35c0 .32.22.7.83.58A12 12 0 0 0 12 .5Z" fill="currentColor"/></svg>
+            </a>
+            <a href="#" aria-label="LinkedIn" title="LinkedIn">
+              <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path fill="currentColor" d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.03-1.85-3.03-1.86 0-2.14 1.45-2.14 2.94v5.66H9.36V9h3.41v1.56h.05c.47-.89 1.61-1.84 3.31-1.84 3.54 0 4.2 2.33 4.2 5.35v6.38ZM5.34 7.41A2.06 2.06 0 1 1 5.33 3.3a2.06 2.06 0 0 1 0 4.12Zm1.77 13.04H3.55V9h3.56v11.45Z"/></svg>
+            </a>
+            <a href="#" aria-label="X" title="X/Twitter">
+              <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26L22.5 21.75h-6.594l-5.158-6.71-5.9 6.71H1.539l7.73-8.79L1.5 2.25h6.75l4.65 6.146 5.344-6.146Zm-1.158 17.52h1.833L7.02 4.116H5.07l12.016 15.654Z"/></svg>
+            </a>
+          </div>
+  </div>
+  <div class="hero-art" aria-hidden="true">
+          <div class="avatar">
+            <img src="./assets/img/profilepicture.jpg" alt="Foto profil Muhammad Kemal Syahru Ramadhan" />
+          </div>
+        </div>
+        </div>
+      </section>
+
+      <section id="about" class="section section--about reveal">
+        <div class="container">
+          <h2 class="section-title">Tentang</h2>
+          <p>
+            Saya seorang <strong>Frontend Developer</strong> yang fokus pada pengalaman pengguna, performa,
+            dan aksesibilitas. Senang membangun UI yang bersih dan interaktif dengan <strong>JavaScript</strong>.
+          </p>
+        </div>
+      </section>
+
+      <section id="skills" class="section section--skills reveal">
+        <div class="container">
+          <h2 class="section-title">Skill</h2>
+          <div id="skillsGrid" class="skills-grid" role="list"></div>
+        </div>
+      </section>
+
+      <section id="projects" class="section section--projects reveal">
+        <div class="container">
+          <div class="projects-header">
+            <h2 class="section-title">Proyek</h2>
+            <div class="filters" id="projectFilters"></div>
+          </div>
+          <div id="projectsGrid" class="projects-grid" role="list"></div>
+        </div>
+      </section>
+
+      <section id="contact" class="section section--contact reveal">
+        <div class="container">
+          <h2 class="section-title">Kontak</h2>
+          <div class="contact-box">
+            <p>Terbuka untuk diskusi dan kolaborasi.</p>
+            <div class="contact-actions">
+              <a class="btn btn-primary" href="mailto:emailkamu@example.com">Email Saya</a>
+              <button class="btn btn-ghost" id="copyEmail" data-email="emailkamu@example.com">Salin Email</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <span>© <span id="year"></span> Nama Kamu</span>
+        <a href="#home" class="back-to-top" aria-label="Kembali ke atas">⬆️</a>
+      </div>
+    </footer>
+
+    <script src="./assets/js/data.js" defer></script>
+    <script src="./assets/js/main.js" defer></script>
+  </body>
+  </html>

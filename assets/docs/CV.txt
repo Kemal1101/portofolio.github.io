@@ -1,0 +1,7 @@
+Ganti file ini dengan CV kamu (PDF) dan ubah tautan di index.html jika perlu.
+Contoh nama file: CV.pdf
+
+Tips:
+- Ekspor CV dari Google Docs/Word ke format PDF
+- Simpan sebagai assets/docs/CV.pdf
+- Di index.html, tombol "Unduh CV" akan otomatis mengunduh file tersebut jika namanya sama
