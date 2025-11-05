@@ -4,43 +4,61 @@ window.projects = [
     description: "Dashboard interaktif dengan chart dinamis dan filter waktu.",
     tags: ["JavaScript", "Frontend", "UI"],
     repo: "#",
-    live: "#"
+    live: "#",
+    details: {
+      timeline: "2024 · 2 bulan",
+      role: "Frontend Developer",
+      responsibilities: [
+        "Membangun komponen chart dan filter",
+        "Optimasi performa rendering",
+        "Integrasi dengan REST API"
+      ],
+      images: [
+        "https://picsum.photos/seed/dashboard1/1200/675",
+        "https://picsum.photos/seed/dashboard2/1200/675"
+      ]
+    }
   },
   {
     title: "Weather Finder",
     description: "Aplikasi cuaca yang mengambil data dari public API dan caching.",
     tags: ["API", "Frontend"],
     repo: "#",
-    live: "#"
+    live: "#",
+    details: {
+      timeline: "2024 · 1 bulan",
+      role: "Fullstack (mini)",
+      responsibilities: [
+        "Konsumsi API cuaca dan handling error",
+        "Implementasi caching sederhana",
+        "UI pencarian dan favorit"
+      ],
+      images: [
+        "https://picsum.photos/seed/weather1/1200/675",
+        "https://picsum.photos/seed/weather2/1200/675"
+      ]
+    }
   },
   {
     title: "Notes App",
     description: "Catatan offline-first dengan LocalStorage dan pencarian.",
     tags: ["JavaScript", "PWA"],
     repo: "#",
-    live: "#"
+    live: "#",
+    details: {
+      timeline: "2023 · 3 minggu",
+      role: "Frontend Developer",
+      responsibilities: [
+        "CRUD catatan dan pencarian instan",
+        "Persistensi data dengan LocalStorage",
+        "Desain UI responsif dan aksesibel"
+      ],
+      images: [
+        "https://picsum.photos/seed/notes1/1200/675"
+      ]
+    }
   },
-  {
-    title: "Landing Page Agency",
-    description: "Landing responsif dengan animasi halus dan aksesibilitas yang baik.",
-    tags: ["Frontend", "UI", "CSS"],
-    repo: "#",
-    live: "#"
-  },
-  {
-    title: "Expense Tracker",
-    description: "Pantau pemasukan/pengeluaran dengan grafik dan ekspor CSV.",
-    tags: ["JavaScript", "Charts"],
-    repo: "#",
-    live: "#"
-  },
-  {
-    title: "API Movie Finder",
-    description: "Cari film, detail, dan favorit menggunakan OMDb API.",
-    tags: ["API", "Frontend", "JavaScript"],
-    repo: "#",
-    live: "#"
-  }
+
 ];
 
 window.skills = [

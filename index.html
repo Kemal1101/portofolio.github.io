@@ -6,7 +6,7 @@
     <title>Portofolio</title>
     <meta name="description" content="Portofolio pribadi – proyek, keterampilan, dan kontak." />
     <!-- <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>💼</text></svg>" /> -->
-    <link rel="stylesheet" href="./assets/css/styles.css" />
+  <link rel="stylesheet" href="./assets/css/styles.css?v=20251105-6" />
   </head>
   <body>
     <header class="site-header">
@@ -42,7 +42,7 @@
           <h1 class="title">Muhammad Kemal Syahru Ramadhan</h1>
           <p class="subtitle">Fullstack Developer • Backend Enthusiast • JavaScript</p>
           <div class="hero-cta">
-            <a class="btn btn-primary" href="./assets/docs/CV.pdf" download>Unduh CV</a>
+            <a class="btn btn-primary" href="https://drive.google.com/file/d/1En3jXKGX8JJ1jnErf4FBvCV0T9JNhtEk/view?usp=drive_link" download>CV</a>
             <a class="btn btn-ghost" href="#projects">Lihat Proyek</a>
           </div>
           <div class="socials">
@@ -154,7 +154,17 @@
       </div>
     </footer>
 
-    <script src="./assets/js/data.js" defer></script>
-    <script src="./assets/js/main.js" defer></script>
+    <!-- Cache-busting query param: bump 'v' when updating JS to avoid stale cache -->
+    <!-- Project details modal -->
+    <div id="projectModal" class="modal" aria-hidden="true">
+      <div class="modal-backdrop" data-close></div>
+      <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <button class="modal-close" data-close aria-label="Tutup">✕</button>
+        <div class="modal-content" id="modalContent"></div>
+      </div>
+    </div>
+
+    <script src="./assets/js/data.js?v=20251105-6" defer></script>
+    <script src="./assets/js/main.js?v=20251105-6" defer></script>
   </body>
   </html>
