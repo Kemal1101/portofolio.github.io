@@ -159,11 +159,33 @@ html[data-theme="light"] .theme-toggle .moon { display: none; }
 .visually-hidden { position: absolute !important; height: 1px; width: 1px; overflow: hidden; clip: rect(1px,1px,1px,1px); white-space: nowrap; }
 
 /* Skills */
-.skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; margin-top: 8px; }
-.skill-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 14px; box-shadow: var(--shadow); display: grid; gap: 12px; }
+.skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; margin-top: 8px; align-items: start; }
+.skill-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 14px; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 12px; align-self: start; }
 .skill-card h3 { margin: 0; font-size: 1.05rem; }
-.skill-list { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.skill-list { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; align-content: start; }
+.skill-list--badges { display: flex; flex-wrap: wrap; gap: 10px; }
+.skill-list--badges .skill-item { margin: 0; padding: 0; }
+
+/* About */
+.about-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 24px; margin-top: 14px; }
+.about-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 18px; align-self: start; }
+.about-card h3 { margin: 0; font-size: 1.05rem; }
+.about-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+.about-list li { line-height: 1.7; }
+.about-tags { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; column-gap: 12px; row-gap: 16px; }
+/* Fallback to ensure vertical spacing between wrapped chips on browsers without flex row-gap */
+.about-tags > li { margin-bottom: 8px; }
+.about-tags .chip { padding: 10px 16px; }
+.muted { color: var(--muted); }
 .skill-item { display: grid; gap: 6px; }
 .meter { height: 10px; background: var(--chip-bg); border: 1px solid var(--border); border-radius: 999px; overflow: hidden; }
 .meter > span { display: block; height: 100%; width: 0%; background: linear-gradient(90deg, var(--brand), var(--brand-2)); transition: width .8s ease; }
 .skill-meta { display: flex; align-items: center; justify-content: space-between; color: var(--muted); font-size: .9rem; }
+
+/* About enhancements */
+.about-head { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.about-icon { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 999px; background: var(--chip-bg); border: 1px solid var(--border); }
+.about-card--highlight { 
+  background: linear-gradient(180deg, color-mix(in oklab, var(--brand) 20%, transparent), transparent 35%), var(--card);
+  border: 1px solid color-mix(in oklab, var(--border) 80%, var(--brand) 20%);
+}

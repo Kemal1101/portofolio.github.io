@@ -147,19 +147,13 @@ function initProjects() {
 
 // Skills rendering
 function skillCardTpl(group) {
-  const items = group.items.map(s => `
-    <li class="skill-item">
-      <div class="skill-meta">
-        <span>${s.name}</span>
-        <span>${s.level}%</span>
-      </div>
-      <div class="meter"><span data-level="${s.level}" style="width:0%"></span></div>
-    </li>
+  const items = group.items.map(name => `
+    <li class="skill-item"><span class="chip">${name}</span></li>
   `).join('');
   return `
     <article class="skill-card" role="listitem">
       <h3>${group.category}</h3>
-      <ul class="skill-list">${items}</ul>
+      <ul class="skill-list skill-list--badges">${items}</ul>
     </article>
   `;
 }

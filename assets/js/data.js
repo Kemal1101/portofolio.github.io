@@ -47,27 +47,32 @@ window.skills = [
   {
     category: 'Frontend',
     items: [
-      { name: 'JavaScript', level: 90 },
-      { name: 'HTML5', level: 90 },
-      { name: 'CSS3', level: 88 },
-      { name: 'React', level: 75 },
-      { name: 'Responsive Design', level: 92 }
+      'JavaScript',
+      'HTML',
+      'CSS',
+      'Blade',
+      'vite',
+      'jquery',
+      'Bootstrap',
     ]
   },
   {
     category: 'Backend',
     items: [
-      { name: 'Node.js', level: 70 },
-      { name: 'REST API', level: 78 },
-      { name: 'Auth & JWT', level: 68 }
+      'php',
+      'Node.js',
+      'laravel',
+      'RESTful API',
+      'MySQL',
+      'Auth & JWT',
     ]
   },
   {
     category: 'Tools',
     items: [
-      { name: 'Git & GitHub', level: 85 },
-      { name: 'VS Code', level: 90 },
-      { name: 'Figma', level: 70 }
+      'Git & GitHub',
+      'VS Code',
+      'SQL Server',
     ]
   }
 ];
