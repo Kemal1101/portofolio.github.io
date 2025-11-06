@@ -113,6 +113,22 @@ function projectCardTpl(p, index) {
     ? `<img class="card-img" src="${firstImg}" alt="${p.title} cover" loading="lazy">`
     : `<span>${letter}</span>`;
   const tags = p.tags.map(t => `<span class="chip">${t}</span>`).join('');
+
+  const hasDocs = !!(p.docs && p.docs !== '#');
+  const hasRepo = !!(p.repo && p.repo !== '#');
+  let linkHtml = '';
+  if (hasDocs) {
+    linkHtml = `<a class="btn btn-ghost btn-docs" href="${p.docs}" target="_blank" rel="noreferrer noopener">Dokumentasi</a>`;
+  } else if (hasRepo) {
+    const label = p.repoLabel || 'Kode';
+    linkHtml = `<a class="btn btn-ghost btn-code" href="${p.repo}" target="_blank" rel="noreferrer noopener">${label}</a>`;
+  } else {
+    // If specifically TAHES without link, show disabled Documentation button as requested
+    if ((p.title || '').toLowerCase() === 'tahes') {
+      linkHtml = `<a class="btn btn-ghost btn-docs" aria-disabled="true">Dokumentasi</a>`;
+    }
+  }
+
   return `
     <article class="card" role="listitem">
       <div class="card-cover" aria-hidden="true">${cover}</div>
@@ -121,7 +137,7 @@ function projectCardTpl(p, index) {
         <p class="card-desc">${p.description}</p>
         <div class="card-tags">${tags}</div>
         <div class="card-actions">
-          <a class=\"btn btn-ghost btn-code\" href=\"${p.repo}\" target=\"_blank\" rel=\"noreferrer noopener\">Kode</a>
+          ${linkHtml}
           <button class="btn btn-primary btn-details" type="button" data-index="${index}">View Details</button>
         </div>
       </div>
@@ -165,11 +181,14 @@ function initProjects() {
 function buildDetailsHtml(p) {
   const timeline = p.details?.timeline || '-';
   const role = p.details?.role || '-';
+  const keyFeatures = Array.isArray(p.details?.keyFeatures) ? p.details.keyFeatures : [];
   const responsibilities = Array.isArray(p.details?.responsibilities) ? p.details.responsibilities : [];
+  const featList = keyFeatures.map(item => `<li>${item}</li>`).join('');
   const respList = responsibilities.map(item => `<li>${item}</li>`).join('');
   const images = Array.isArray(p.details?.images) ? p.details.images : [];
   const tags = (p.tags || []).map(t => `<span class=\"chip\">${t}</span>`).join('');
-  const repoBtn = p.repo && p.repo !== '#' ? `<a class=\"btn btn-ghost\" href=\"${p.repo}\" target=\"_blank\" rel=\"noreferrer noopener\">Kode</a>` : '';
+  const docsBtn = p.docs && p.docs !== '#' ? `<a class=\"btn btn-ghost btn-docs\" href=\"${p.docs}\" target=\"_blank\" rel=\"noreferrer noopener\">Documentation</a>` : '';
+  const repoBtn = p.repo && p.repo !== '#' ? `<a class=\"btn btn-ghost\" href=\"${p.repo}\" target=\"_blank\" rel=\"noreferrer noopener\">${p.repoLabel || 'Kode'}</a>` : '';
   const liveBtn = p.live && p.live !== '#' ? `<a class=\"btn btn-primary\" href=\"${p.live}\" target=\"_blank\" rel=\"noreferrer noopener\">Kunjungi</a>` : '';
   const gallery = images.length ? `
     <div class=\"modal-gallery\" data-index=\"0\">
@@ -185,12 +204,22 @@ function buildDetailsHtml(p) {
     <p class="card-desc">${p.description}</p>
     ${gallery}
     <div class="modal-meta">
-      <div class="meta-card"><strong>Timeline:</strong><br>${timeline}</div>
-      <div class="meta-card"><strong>Role:</strong><br>${role}</div>
-      <div class="meta-card"><strong>Tags/Stack:</strong><br><div class="card-tags" style="margin-top:6px">${tags}</div></div>
+      <div class="meta-card">
+        <div class="meta-label"><span class="meta-ic">🕒</span>Timeline</div>
+        <div class="meta-value">${timeline}</div>
+      </div>
+      <div class="meta-card">
+        <div class="meta-label"><span class="meta-ic">👤</span>Role</div>
+        <div class="meta-value">${role}</div>
+      </div>
+      <div class="meta-card meta-card--tags">
+        <div class="meta-label"><span class="meta-ic">🏷</span>Tags/Stack</div>
+        <div class="meta-value"><div class="card-tags">${tags}</div></div>
+      </div>
     </div>
-    ${respList ? `<div><strong>Tanggung jawab/Highlight:</strong><ul class="about-list" style="margin-top:6px">${respList}</ul></div>` : ''}
-    <div class="modal-actions">${repoBtn} ${liveBtn}</div>
+    ${featList ? `<div class="section-line"></div><h4 class="modal-subtitle">Fitur Utama</h4><ul class="feat-list">${featList}</ul>` : ''}
+    ${respList ? `<div class="section-line"></div><h4 class="modal-subtitle">Tanggung jawab/Highlight</h4><ul class="resp-list">${respList}</ul>` : ''}
+    <div class="modal-actions">${docsBtn || repoBtn} ${liveBtn}</div>
   `;
 }
 
@@ -355,6 +384,38 @@ function initSmoothScroll() {
   });
 }
 
+// ScrollSpy: highlight nav link based on visible section
+function initScrollSpy() {
+  const header = document.querySelector('.site-header');
+  const links = Array.from(document.querySelectorAll('.nav-list a[href^="#"]'));
+  const sectionIds = links
+    .map(a => a.getAttribute('href'))
+    .filter(h => h && h.startsWith('#'))
+    .map(h => h.slice(1));
+  const sections = sectionIds
+    .map(id => document.getElementById(id))
+    .filter(Boolean);
+
+  const setActive = (id) => {
+    links.forEach(a => a.removeAttribute('aria-current'));
+    const active = document.querySelector(`.nav-list a[href="#${id}"]`);
+    if (active) active.setAttribute('aria-current', 'true');
+  };
+
+  const compute = () => {
+    const top = window.scrollY + (header?.offsetHeight || 0) + 12; // offset past fixed header
+    let currentId = sections[0]?.id || '';
+    for (const sec of sections) {
+      if (sec.offsetTop <= top) currentId = sec.id;
+    }
+    if (currentId) setActive(currentId);
+  };
+
+  compute();
+  window.addEventListener('scroll', compute, { passive: true });
+  window.addEventListener('resize', compute);
+}
+
 // Footer year
 function setYear() {
   const y = new Date().getFullYear();
@@ -374,3 +435,4 @@ initContact();
 initSmoothScroll();
 setYear();
 initHeaderShadow();
+initScrollSpy();
