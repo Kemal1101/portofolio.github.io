@@ -398,7 +398,17 @@ function initSmoothScroll() {
       const target = document.querySelector(id);
       if (target) {
         e.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // Immediate nav highlight for better feedback on different resolutions
+        const navLinks = Array.from(document.querySelectorAll('.nav-list a[href^="#"]'));
+        navLinks.forEach(l => l.removeAttribute('aria-current'));
+        const active = document.querySelector(`.nav-list a[href="${id}"]`);
+        if (active) active.setAttribute('aria-current', 'true');
+
+        // Smooth scroll with header offset to avoid off-by-a-bit cases
+        const header = document.querySelector('.site-header');
+        const offset = (header?.offsetHeight || 0) + 10;
+        const y = target.getBoundingClientRect().top + window.pageYOffset - offset;
+        window.scrollTo({ top: y, behavior: 'smooth' });
       }
     });
   });
