@@ -148,6 +148,5 @@ window.contactLinks = [
   { type: 'github', label: 'GitHub', url: 'https://github.com/Kemal1101' },
   { type: 'linkedin', label: 'LinkedIn', url: 'https://www.linkedin.com/in/mkemalsr1101/' },
   { type: 'email', label: 'Email', url: 'mailto:emailkamu@example.com' },
-  { type: 'whatsapp', label: 'WhatsApp', url: 'https://wa.me/+6285173363844' },
-  
+
 ];
