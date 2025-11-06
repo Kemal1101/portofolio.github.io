@@ -55,6 +55,7 @@ body {
 .section { padding: 72px 0; scroll-margin-top: 80px; position: relative; overflow: hidden; }
 .section + .section { border-top: 1px solid color-mix(in oklab, var(--border) 85%, var(--brand) 15%); }
 .section-title { font-size: clamp(1.4rem, 1rem + 2vw, 2rem); margin: 0 0 16px; }
+.section-subtitle { margin: -6px 0 18px; color: var(--muted); max-width: 70ch; }
 /* readable paragraphs */
 .section p { max-width: 70ch; }
 
@@ -63,7 +64,8 @@ body {
 .section--skills,
 .section--contact { background: var(--section-bg-a); }
 .section--about,
-.section--projects { background: var(--section-bg-b); }
+.section--projects,
+.section--certs { background: var(--section-bg-b); }
 
 /* Remove strong per-section overlays to keep differences subtle */
 
@@ -152,6 +154,19 @@ html[data-theme="light"] .theme-toggle .moon { display: none; }
 .card-actions { display: flex; gap: 8px; margin-top: 2px; }
 .card-actions { display: flex; gap: 8px; margin-top: auto; }
 .card-actions a { flex: 1; text-align: center; }
+
+/* Certifications */
+.certs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 16px; margin-top: 12px; }
+.cert-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 18px; box-shadow: var(--shadow); display: grid; gap: 12px; align-content: start; }
+.cert-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.cert-badge { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 999px; background: color-mix(in oklab, var(--brand) 20%, var(--chip-bg) 80%); border: 1px solid var(--border); }
+.cert-title { margin: 0; font-size: 1.1rem; }
+.cert-rows { display: grid; gap: 8px; }
+.cert-row { display: flex; align-items: center; gap: 8px; color: var(--muted); }
+.cert-row-icon { width: 18px; display: inline-flex; justify-content: center; }
+.cert-desc { margin: 0; color: var(--muted); }
+.cert-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.cert-footer .btn { width: 100%; justify-content: center; }
 
 /* Modal */
 .modal { position: fixed; inset: 0; display: none; z-index: 50; display: none; }

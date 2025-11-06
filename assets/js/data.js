@@ -94,3 +94,15 @@ window.skills = [
     ]
   }
 ];
+
+// Sertifikasi (contoh data – ganti dengan sertifikat asli kamu)
+window.certifications = [
+  {
+    title: 'Associate Data Scientist',
+    issuer: 'Kementrian Komunikasi dan Digital',
+    date: '2025',
+    description: 'Menguasai konsep dasar dan tools Data Science, proses data (mengumpulkan, menelaah, memvalidasi, menentukan objek, membersihkan, mengkonstruksi, dan menentukan label data), hingga membangun dan mengevaluasi hasil pemodelan.',
+    skills: ['Python', 'SQL', 'Machine Learning'],
+    credentialUrl: 'https://drive.google.com/file/d/1D_L1DszxbnrDi0lQwoK-Yta2fzDBNQsG/view?usp=drive_link'
+  },
+];

@@ -1,6 +1,7 @@
 // Access globals defined by data.js (classic script)
 const projects = (window.projects ?? []);
 const skills = (window.skills ?? []);
+const certifications = (window.certifications ?? []);
 
 function $(sel, ctx = document) { return ctx.querySelector(sel); }
 function $all(sel, ctx = document) { return Array.from(ctx.querySelectorAll(sel)); }
@@ -272,6 +273,34 @@ function renderSkills() {
   grid.innerHTML = skills.map(skillCardTpl).join('');
 }
 
+// Certifications rendering
+function certCardTpl(c) {
+  const tags = (c.skills || []).map(t => `<span class=\"chip\">${t}</span>`).join('');
+  const date = c.date ? `${c.date}` : '';
+  const link = c.credentialUrl && c.credentialUrl !== '#' ? `<a class=\"btn btn-ghost btn-cert\" href=\"${c.credentialUrl}\" target=\"_blank\" rel=\"noreferrer noopener\">View Details</a>` : '';
+  return `
+    <article class=\"cert-card\" role=\"listitem\"> 
+      <div class=\"cert-head\"> 
+        <h3 class=\"cert-title\">${c.title}</h3> 
+        <span class=\"cert-badge\" aria-hidden=\"true\">🏅</span> 
+      </div>
+      <div class=\"cert-rows\">
+        <div class=\"cert-row\"><span class=\"cert-row-icon\">🏢</span><span>${c.issuer}</span></div>
+        ${date ? `<div class=\"cert-row\"><span class=\"cert-row-icon\">📅</span><span>${date}</span></div>` : ''}
+      </div>
+      ${c.description ? `<p class=\"cert-desc\">${c.description}</p>` : ''}
+      ${tags ? `<div class=\"cert-tags\">${tags}</div>` : ''}
+      <div class=\"cert-footer\">${link}</div>
+    </article>
+  `;
+}
+
+function renderCertifications() {
+  const grid = $('#certsGrid');
+  if (!grid) return;
+  grid.innerHTML = certifications.map(certCardTpl).join('');
+}
+
 // Contact helpers
 function initContact() {
   const btn = $('#copyEmail');
@@ -339,6 +368,7 @@ initHeader();
 initThemeToggle();
 initReveal();
 renderSkills();
+renderCertifications();
 initProjects();
 initContact();
 initSmoothScroll();
