@@ -218,6 +218,15 @@ body.no-scroll { overflow: hidden; }
 /* Contact */
 .contact-box { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 16px; display: grid; gap: 12px; max-width: 680px; margin-inline: auto; }
 .contact-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+.contact-box .socials a { color: var(--text); }
+.contact-box .socials a:hover { filter: brightness(1.05); }
+.contact-icons { display: flex; gap: 12px; flex-wrap: wrap; }
+.contact-icon { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; background: var(--chip-bg); border: 1px solid var(--border); color: var(--text); text-decoration: none; font-size: 20px; transition: transform .08s ease, filter .2s ease, background .2s ease, box-shadow .2s ease; }
+.contact-icon:hover { background: color-mix(in oklab, var(--chip-bg) 75%, var(--brand) 25%); box-shadow: 0 6px 18px rgba(2,6,23,.35); transform: translateY(-1px); }
+
+/* Toast (copy email feedback) */
+.toast { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); padding: 10px 14px; border-radius: 10px; background: var(--bg-elev); border: 1px solid var(--border); color: var(--text); box-shadow: var(--shadow); opacity: 0; pointer-events: none; transition: opacity .25s ease, transform .25s ease; z-index: 60; }
+.toast.show { opacity: 1; transform: translate(-50%, -2px); }
 
 /* Footer */
 .site-footer { padding: 28px 0; border-top: 1px solid var(--border); background: color-mix(in oklab, var(--bg) 88%, transparent); }

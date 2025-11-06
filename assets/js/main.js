@@ -2,12 +2,27 @@
 const projects = (window.projects ?? []);
 const skills = (window.skills ?? []);
 const certifications = (window.certifications ?? []);
+const contactLinks = (window.contactLinks ?? []);
 
 function $(sel, ctx = document) { return ctx.querySelector(sel); }
 function $all(sel, ctx = document) { return Array.from(ctx.querySelectorAll(sel)); }
 
 // Theme
 const themeKey = 'portfolio-theme';
+// Lightweight toast utility (reused for small notifications)
+function showToast(text) {
+  let toast = document.getElementById('copyToast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'copyToast';
+    toast.className = 'toast';
+    document.body.appendChild(toast);
+  }
+  toast.textContent = text;
+  toast.classList.add('show');
+  clearTimeout(toast._t);
+  toast._t = setTimeout(() => toast.classList.remove('show'), 1800);
+}
 function applyTheme(theme) {
   document.documentElement.setAttribute('data-theme', theme);
 }
@@ -74,15 +89,6 @@ function initReveal() {
     for (const e of entries) {
       if (e.isIntersecting) {
         e.target.classList.add('in-view');
-        // Animate skills meters when skills section appears
-        if (e.target.id === 'skills') {
-          document.querySelectorAll('#skills .meter > span').forEach(bar => {
-            const level = Number(bar.getAttribute('data-level') || '0');
-            requestAnimationFrame(() => {
-              bar.style.width = level + '%';
-            });
-          });
-        }
         io.unobserve(e.target);
       }
     }
@@ -90,9 +96,10 @@ function initReveal() {
   $all('.reveal').forEach(el => io.observe(el));
 }
 
-// Projects rendering and filters
+// Filters for projects
 function renderFilters(allTags) {
   const filtersEl = $('#projectFilters');
+  if (!filtersEl) return;
   filtersEl.innerHTML = '';
   const tags = ['Semua', ...Array.from(allTags).sort()];
   for (const t of tags) {
@@ -106,6 +113,7 @@ function renderFilters(allTags) {
   }
 }
 
+// Project card template
 function projectCardTpl(p, index) {
   const letter = p.title.charAt(0).toUpperCase();
   const firstImg = p?.details?.images?.[0] || '';
@@ -118,14 +126,13 @@ function projectCardTpl(p, index) {
   const hasRepo = !!(p.repo && p.repo !== '#');
   let linkHtml = '';
   if (hasDocs) {
-    linkHtml = `<a class="btn btn-ghost btn-docs" href="${p.docs}" target="_blank" rel="noreferrer noopener">Dokumentasi</a>`;
+    linkHtml = `<a class="btn btn-ghost btn-docs" href="${p.docs}" target="_blank" rel="noreferrer noopener">dokumentasi</a>`;
   } else if (hasRepo) {
     const label = p.repoLabel || 'Kode';
     linkHtml = `<a class="btn btn-ghost btn-code" href="${p.repo}" target="_blank" rel="noreferrer noopener">${label}</a>`;
   } else {
-    // If specifically TAHES without link, show disabled Documentation button as requested
     if ((p.title || '').toLowerCase() === 'tahes') {
-      linkHtml = `<a class="btn btn-ghost btn-docs" aria-disabled="true">Dokumentasi</a>`;
+      linkHtml = `<a class="btn btn-ghost btn-docs" aria-disabled="true">dokumentasi</a>`;
     }
   }
 
@@ -187,7 +194,7 @@ function buildDetailsHtml(p) {
   const respList = responsibilities.map(item => `<li>${item}</li>`).join('');
   const images = Array.isArray(p.details?.images) ? p.details.images : [];
   const tags = (p.tags || []).map(t => `<span class=\"chip\">${t}</span>`).join('');
-  const docsBtn = p.docs && p.docs !== '#' ? `<a class=\"btn btn-ghost btn-docs\" href=\"${p.docs}\" target=\"_blank\" rel=\"noreferrer noopener\">Documentation</a>` : '';
+  const docsBtn = p.docs && p.docs !== '#' ? `<a class=\"btn btn-ghost btn-docs\" href=\"${p.docs}\" target=\"_blank\" rel=\"noreferrer noopener\">dokumentasi</a>` : '';
   const repoBtn = p.repo && p.repo !== '#' ? `<a class=\"btn btn-ghost\" href=\"${p.repo}\" target=\"_blank\" rel=\"noreferrer noopener\">${p.repoLabel || 'Kode'}</a>` : '';
   const liveBtn = p.live && p.live !== '#' ? `<a class=\"btn btn-primary\" href=\"${p.live}\" target=\"_blank\" rel=\"noreferrer noopener\">Kunjungi</a>` : '';
   const gallery = images.length ? `
@@ -332,39 +339,52 @@ function renderCertifications() {
 
 // Contact helpers
 function initContact() {
-  const btn = $('#copyEmail');
-  const fallbackCopy = (text) => {
-    const ta = document.createElement('textarea');
-    ta.value = text;
-    ta.setAttribute('readonly', '');
-    ta.style.position = 'absolute';
-    ta.style.left = '-9999px';
-    document.body.appendChild(ta);
-    ta.select();
-    let success = false;
-    try { success = document.execCommand('copy'); } catch {}
-    document.body.removeChild(ta);
-    return success;
-  };
-
-  btn?.addEventListener('click', async () => {
-    const email = btn.dataset.email || '';
-    const done = (ok) => {
-      btn.textContent = ok ? 'Tersalin ✓' : 'Gagal menyalin';
-      setTimeout(() => btn.textContent = 'Salin Email', 1500);
+  // Attach copy-to-clipboard handler for email icon if present
+  const copyTargets = $all('[data-copy-email]');
+  if (copyTargets.length) {
+    const defaultEmail = 'lataxa.11@gmail.com';
+    const notify = (el) => {
+      el.classList.add('copied');
+      el.setAttribute('aria-label', 'Email disalin');
+      setTimeout(() => {
+        el.classList.remove('copied');
+        el.setAttribute('aria-label', 'Salin email');
+      }, 1800);
+      showToast('alamat email sudah disalin');
     };
-    if (!email) return;
-    if (!('clipboard' in navigator)) {
-      const ok = fallbackCopy(email);
-      done(ok);
-      return;
-    }
-    try {
-      await navigator.clipboard.writeText(email);
-      done(true);
-    } catch {
-      const ok = fallbackCopy(email);
-      done(ok);
+    copyTargets.forEach(el => {
+      el.addEventListener('click', (e) => {
+        e.preventDefault();
+        const email = (el.getAttribute('data-copy-email') || '').trim() || defaultEmail;
+        if (!navigator.clipboard) {
+          // Fallback
+          const ta = document.createElement('textarea');
+          ta.value = email;
+          document.body.appendChild(ta);
+          ta.select();
+          try { document.execCommand('copy'); } catch(err) {}
+          document.body.removeChild(ta);
+        } else {
+          navigator.clipboard.writeText(email).catch(()=>{});
+        }
+        notify(el);
+      });
+    });
+  }
+  // Normalize WhatsApp links if data-wa is provided
+  $all('a[aria-label="WhatsApp"]').forEach(a => {
+    const raw = (a.getAttribute('data-wa') || '').replace(/[^0-9]/g, '');
+    const preset = (a.getAttribute('data-wa-text') || '').trim();
+    if (raw) {
+      const base = `https://wa.me/${raw}`;
+      const href = preset ? `${base}?text=${encodeURIComponent(preset)}` : base;
+      a.setAttribute('href', href);
+    } else {
+      // If developer accidentally kept '+' in href, sanitize it
+      const href = a.getAttribute('href') || '';
+      if (href.includes('wa.me/+')) {
+        a.setAttribute('href', href.replace('wa.me/+', 'wa.me/'));
+      }
     }
   });
 }
@@ -436,3 +456,4 @@ initSmoothScroll();
 setYear();
 initHeaderShadow();
 initScrollSpy();
+// Optional: add a global class for copied state styling if desired
