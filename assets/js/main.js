@@ -313,7 +313,7 @@ function renderSkills() {
 function certCardTpl(c) {
   const tags = (c.skills || []).map(t => `<span class=\"chip\">${t}</span>`).join('');
   const date = c.date ? `${c.date}` : '';
-  const link = c.credentialUrl && c.credentialUrl !== '#' ? `<a class=\"btn btn-ghost btn-cert\" href=\"${c.credentialUrl}\" target=\"_blank\" rel=\"noreferrer noopener\">View Details</a>` : '';
+  const link = c.credentialUrl && c.credentialUrl !== '#' ? `<a class=\"btn btn-ghost btn-cert\" href=\"${c.credentialUrl}\" target=\"_blank\" rel=\"noreferrer noopener\">View Sertificate</a>` : '';
   return `
     <article class=\"cert-card\" role=\"listitem\"> 
       <div class=\"cert-head\"> 
@@ -342,7 +342,7 @@ function initContact() {
   // Attach copy-to-clipboard handler for email icon if present
   const copyTargets = $all('[data-copy-email]');
   if (copyTargets.length) {
-    const defaultEmail = 'lataxa.11@gmail.com';
+    const defaultEmail = 'kemalsyahru15@gmail.com';
     const notify = (el) => {
       el.classList.add('copied');
       el.setAttribute('aria-label', 'Email disalin');
