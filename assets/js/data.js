@@ -141,6 +141,14 @@ window.certifications = [
     skills: ['Python', 'Machine Learning'],
     credentialUrl: 'https://drive.google.com/file/d/1D_L1DszxbnrDi0lQwoK-Yta2fzDBNQsG/view?usp=drive_link'
   },
+  {
+    title: 'AI Ready ASEAN',
+    issuer: 'ASEAN Foundation',
+    date: '2025',
+    description: 'Menguasai fundamental AI generatif, penerapan praktis untuk meningkatkan produktivitas, serta prinsip-prinsip utama penggunaan AI yang etis, aman, dan bertanggung jawab.',
+    skills: ['Generative AI', 'Ethical AI Use'],
+    credentialUrl: 'https://drive.google.com/file/d/1nOo0lvqSNxFbOieB_2t_28A4PCCbI8rG/view?usp=drive_link'
+  },
 ];
 
 // Contact links (icons rendered in Contact section)
