@@ -2,7 +2,7 @@ window.projects = [
   {
     title: "SIPTOC",
     description: "Sistem Administrasi Tes TOEIC sebuah solusi terintegrasi yang dirancang untuk mengelola dan menyederhanakan keseluruhan proses penyelenggaraan Tes TOEIC Internasional bagi mahasiswa Politeknik Negeri Malang (Polinema).",
-    tags: ["Laravel", "PHP", "Javascript", "MySQL", "Bootstrap"],
+    tags: ["Laravel", "PHP", "JavaScript", "MySQL", "Bootstrap"],
     repo: "https://github.com/Kemal1101/toeic",
     details: {
       timeline: "2025 · 4 bulan",
@@ -39,7 +39,7 @@ window.projects = [
   {
     title: "Bebas Tanggungan",
     description: "Proyek ini bertujuan untuk mengatasi inefisiensi dalam proses birokrasi penyelesaian tanggungan mahasiswa di Jurusan Teknologi Informasi, Politeknik Negeri Malang, yang sebelumnya masih dilakukan secara manual.",
-    tags: ["JavaScript", "php", "SQL Server", "Bootstrap"],
+    tags: ["JavaScript", "PHP", "SQL Server", "Bootstrap"],
     repo: "https://github.com/zidnafaz/BebasTanggungan",
     details: {
       timeline: "2024 · 4 bulan",
@@ -155,6 +155,5 @@ window.certifications = [
 window.contactLinks = [
   { type: 'github', label: 'GitHub', url: 'https://github.com/Kemal1101' },
   { type: 'linkedin', label: 'LinkedIn', url: 'https://www.linkedin.com/in/mkemalsr1101/' },
-  { type: 'email', label: 'Email', url: 'mailto:emailkamu@example.com' },
-
+  { type: 'email', label: 'Email', url: 'mailto:kemalsyahru15@gmail.com' },
 ];
